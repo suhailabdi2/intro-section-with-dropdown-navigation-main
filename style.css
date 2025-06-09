@@ -235,49 +235,201 @@ nav {
   display: flex;
 }
 
-/* Responsive styles */
-@media (max-width: 900px) {
+/* Hamburger styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 200;
+}
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #151515;
+  border-radius: 2px;
+}
+
+/* Mobile nav drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 65vw;
+  max-width: 320px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 24px rgba(0,0,0,0.12);
+  z-index: 150;
+  padding: 32px 24px;
+  flex-direction: column;
+  transition: transform 0.3s;
+  transform: translateX(100%);
+}
+.mobile-nav.open {
+  display: flex;
+  transform: translateX(0);
+}
+.close-mobile-nav {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #151515;
+  align-self: flex-end;
+  margin-bottom: 24px;
+  cursor: pointer;
+}
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.mobile-nav li {
+  position: relative;
+}
+.mobile-nav a, .mobile-nav button {
+  color: #686868;
+  font-size: 18px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px 0;
+  width: 100%;
+}
+.mobile-nav .dropdown {
+  display: none;
+  position: static;
+  box-shadow: none;
+  background: none;
+  padding: 0 0 0 16px;
+}
+.mobile-nav .dropdown-parent.open > .dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.mobile-nav .dropdown a {
+  font-size: 16px;
+  padding: 8px 0 8px 24px;
+}
+
+/* Hide desktop nav on mobile */
+@media (max-width: 700px) {
+  nav {
+    position: static;
+    height: auto;
+    padding: 24px 16px 0 16px;
+    flex-wrap: wrap;
+  }
+  .nav-links,
+  .login,
+  .register {
+    display: none !important;
+  }
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
   .main-container {
-    flex-direction: column-reverse;
-    padding: 32px 16px;
+    flex-direction: column;
+    padding: 0;
+    height: auto;
+    min-height: 100vh;
   }
-  .hero {
+  nav {
+    order: 0; /* Ensure nav stays at the very top */
+    width: 100%;
+    display: flex;
     align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    position: fixed; /* Fix nav to the top */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    padding: 0 16px;
+    background: #fff;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
   }
-  .clients {
-    justify-content: center;
+  .main-container {
+    padding-top: 64px; /* Add space for fixed nav */
+  }
+  .nav-links,
+  .login,
+  .register {
+    display: none !important;
+  }
+  .hamburger {
+    display: flex;
+    margin-left: auto;
   }
   .image {
-    margin-bottom: 32px;
+    order: 1;
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  .hero {
+    order: 2;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    gap: 24px;
+  }
+  .hero-image {
+    width: 220px;
+    max-width: 90vw;
+    margin: 0 auto 16px auto;
+    display: block;
+  }
+  .desc h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  .desc p {
+    font-size: 1rem;
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+  .learn-more {
+    font-size: 1rem;
+    padding: 12px 28px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .clients {
+    gap: 18px;
+    margin-top: 24px;
+    justify-content: center;
+  }
+  .clients img {
+    height: 18px;
   }
 }
 
-@media (max-width: 600px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 24px 0 0 0;
-  }
-  .main-container {
-    padding: 0;
-    box-shadow: none;
-    border-radius: 0;
-    margin: 0;
-  }
-  .hero-image {
-    width: 100%;
-    max-width: 320px;
-  }
-  .desc h1 {
-    font-size: 32px;
-  }
-  .desc p {
-    font-size: 16px;
-  }
-  .clients img {
-    height: 20px;
+/* Overlay for mobile nav */
+@media (max-width: 700px) {
+  body.mobile-nav-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 100;
   }
 }
 

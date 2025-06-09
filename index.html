@@ -13,6 +13,11 @@
     <div class="hero">
       <nav>
         <img src="./images/logo.svg" alt="Logo" class="logo">
+        <button class="hamburger" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <ul class="nav-links">
           <li class="dropdown-parent">
             <a href="#">Features <span class="arrow">&#9662;</span></a>
@@ -34,8 +39,32 @@
           <li><a href="#">Careers</a></li>
           <li><a href="#">About</a></li>
         </ul>
-        <button class="login">Login</button>
-        <button class="register">Register</button>
+        <div class="mobile-nav">
+          <button class="close-mobile-nav" aria-label="Close menu">&times;</button>
+          <ul>
+            <li class="dropdown-parent">
+              <a href="#">Features <span class="arrow">&#9662;</span></a>
+              <ul class="dropdown features-dropdown">
+                <li><a href="#"><img src="./images/icon-todo.svg" alt=""> Todo List</a></li>
+                <li><a href="#"><img src="./images/icon-calendar.svg" alt=""> Calendar</a></li>
+                <li><a href="#"><img src="./images/icon-reminders.svg" alt=""> Reminders</a></li>
+                <li><a href="#"><img src="./images/icon-planning.svg" alt=""> Planning</a></li>
+              </ul>
+            </li>
+            <li class="dropdown-parent">
+              <a href="#">Company <span class="arrow">&#9662;</span></a>
+              <ul class="dropdown company-dropdown">
+                <li><a href="#">History</a></li>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">About</a></li>
+            <li><button class="login">Login</button></li>
+            <li><button class="register">Register</button></li>
+          </ul>
+        </div>
       </nav>
       <div class="desc">
         <h1>Make<br>remote work</h1>
@@ -58,5 +87,32 @@
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
   </div>
+  <script>
+const hamburger = document.querySelector('.hamburger');
+const mobileNav = document.querySelector('.mobile-nav');
+const closeBtn = document.querySelector('.close-mobile-nav');
+const body = document.body;
+
+// Open mobile nav
+hamburger.addEventListener('click', () => {
+  mobileNav.classList.add('open');
+  body.classList.add('mobile-nav-open');
+});
+
+// Close mobile nav
+closeBtn.addEventListener('click', () => {
+  mobileNav.classList.remove('open');
+  body.classList.remove('mobile-nav-open');
+});
+
+// Dropdowns in mobile nav
+document.querySelectorAll('.mobile-nav .dropdown-parent > a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const parent = this.parentElement;
+    parent.classList.toggle('open');
+  });
+});
+</script>
 </body>
 </html>
